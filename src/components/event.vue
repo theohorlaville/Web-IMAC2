@@ -1,10 +1,15 @@
 <template>
   <div class="event">
-    <div class="info-mina">
-      <h2>{{ titre }}</h2>
-      <p>{{ date }}</p>
-    </div>
-    <img v-bind:src="pictureUrl" class="img-minia" />
+    <a v-bind:href="eventUrl" target="blank">
+      <div class="info-mina">
+        <h2>{{ titre }}</h2>
+        <p>{{ date }}</p>
+        <i>
+          <p>{{ genre }}</p>
+        </i>
+      </div>
+      <img v-bind:src="pictureUrl" class="img-minia" />
+    </a>
   </div>
 </template>
 
@@ -15,7 +20,9 @@ export default {
   props: {
     date: String,
     titre: String,
+    genre: String,
     pictureUrl: String,
+    eventUrl: String,
   },
 };
 </script>
@@ -25,7 +32,7 @@ export default {
 h2 {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  font-size: 1vw;
+  font-size: 20px;
   overflow-wrap: break-word;
   margin: 0% 1px 0% 1px;
 }
@@ -37,7 +44,6 @@ p {
   flex-direction: column;
   align-items: center;
   transition-duration: 0.2s;
-  cursor: pointer;
 }
 
 .info-mina {
@@ -46,6 +52,8 @@ p {
   position: absolute;
   background-image: none;
   width: 18vw;
+  min-width: 300px;
+
   z-index: 2;
   transition-duration: 0.2s;
   color: white;
@@ -77,5 +85,21 @@ p {
   border-radius: 8px;
   transform: scale(1);
   transition-duration: 0.2s;
+}
+
+@media screen and (max-width: 768px) {
+  .info-mina {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1)
+    );
+  }
+  h2 {
+    font-size: 12px;
+  }
 }
 </style>

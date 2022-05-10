@@ -9,13 +9,25 @@
 export default {
   name: "top",
 
-  props: {},
+  props: {
+    filter: String,
+    sort: String,
+  },
+
+  methods: {
+    emitSort: function () {
+      this.$emit("sortEvent", "sort");
+    },
+    emitFilter: function () {
+      this.$emit("filterEvent", "filter");
+    },
+  },
 };
 </script>
 
 <style scoped>
 .header {
-  height: 12vh;
+  height: auto;
   width: 100%;
   background-color: white;
   position: sticky;
@@ -27,6 +39,7 @@ export default {
   justify-content: center;
   z-index: 3;
   padding: 0.5%;
+  box-shadow: 0 1px 5px black;
 }
 
 h1 {
