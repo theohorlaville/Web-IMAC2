@@ -1,7 +1,27 @@
 <template>
   <div class="header">
     <h1>Wonderful Events</h1>
-    <p>Looking for the <b>best events</b> ? This is the place for !</p>
+    <div id="filters">
+      <select
+        class="w3-select"
+        v-on:input="emitSort"
+        :value="sort"
+        id="event-sort"
+      >
+        <option value="AZArt">Event Alphabétique</option>
+        <option value="ZAArt">Event !Alphabétique</option>
+        <option value="AZGenre">Genre Alphabétique</option>
+        <option value="ZAGenre">Genre !Alphabétique</option>
+      </select>
+
+      <input
+        type="text"
+        class="w3-input"
+        v-on:input="emitFilter"
+        :value="filter"
+        placeholder="Chercher un event"
+      />
+    </div>
   </div>
 </template>
 
@@ -9,17 +29,13 @@
 export default {
   name: "top",
 
-  props: {
-    filter: String,
-    sort: String,
-  },
-
+  props: ["sort", "filter"],
   methods: {
-    emitSort: function () {
-      this.$emit("sortEvent", "sort");
+    emitSort: function (event) {
+      this.$emit("sortEvent", event.target.value);
     },
-    emitFilter: function () {
-      this.$emit("filterEvent", "filter");
+    emitFilter: function (event) {
+      this.$emit("filterEvent", event.target.value);
     },
   },
 };

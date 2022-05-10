@@ -1,29 +1,17 @@
 <template>
   <div id="app">
-    <top></top>
-
-    <div id="filters">
-      <select class="w3-select" v-model="eventSortType" id="event-sort">
-        <option value="AZArt">Event Alphabétique</option>
-        <option value="ZAArt">Event !Alphabétique</option>
-        <option value="AZGenre">Genre Alphabétique</option>
-        <option value="ZAGenre">Genre !Alphabétique</option>
-      </select>
-
-      <input
-        type="text"
-        class="w3-input"
-        v-model="searchEvent"
-        placeholder="Chercher un event"
-      />
-
-      <img
-        v-if="searchEvent"
-        @click="cleanSearch"
-        src="./assets/close.png"
-        id="close"
-      />
-    </div>
+    <top
+      v-on:sortEvent="updateSort"
+      v-on:filterEvent="updateFilter"
+      :filter="searchEvent"
+      :sort="eventSortType"
+    ></top>
+    <img
+      v-if="searchEvent"
+      @click="cleanSearch"
+      src="./assets/close.png"
+      id="close"
+    />
     <div id="event-container">
       <div v-for="event in eventOrganizedData" :key="event.id" class="events">
         <event
@@ -122,29 +110,27 @@ export default {
     async retrieveEventsData() {
       this.loading = true;
       this.tempArray = await getEvent(this.page);
-      this.eventsData = [...this.eventsData, ...this.tempArray]; /*
-      this.eventsData.forEach((element) => {
-        if (!element.classifications) {
-          const segment = {
-            segment: {
-              name: "No-genre",
-            },
-          };
-          element.classifications = [];
-          element.classifications[0] = segment;
-        }
-      });*/
+      this.eventsData = [...this.eventsData, ...this.tempArray];
       this.loaded();
     },
-    cleanSearch: function () {
-      this.searchEvent = "";
-    },
+
     loadMore: function () {
       this.page++;
       this.retrieveEventsData();
     },
     loaded: function () {
       this.loading = false;
+    },
+    updateSort: function (value) {
+      this.eventSortType = value;
+      console.log("update sort");
+    },
+    updateFilter: function (value) {
+      this.searchEvent = value;
+      console.log("update filter");
+    },
+    cleanSearch: function () {
+      this.searchEvent = "";
     },
   },
 };
