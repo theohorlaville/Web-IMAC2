@@ -6,12 +6,14 @@
       :filter="searchEvent"
       :sort="eventSortType"
     ></top>
-    <img
-      v-if="searchEvent"
-      @click="cleanSearch"
-      src="./assets/close.png"
-      id="close"
-    />
+    <div id="close-container">
+      <img
+        v-if="searchEvent"
+        @click="cleanSearch"
+        src="./assets/close.png"
+        id="close"
+      />
+    </div>
     <div id="event-container">
       <div v-for="event in eventOrganizedData" :key="event.id" class="events">
         <event
@@ -24,7 +26,7 @@
       </div>
     </div>
 
-    <div id="test" v-if="loading">
+    <div id="loader" v-if="loading">
       <svg
         class="spinner"
         width="65px"
@@ -43,9 +45,9 @@
         ></circle>
       </svg>
     </div>
-
-    <img @click="loadMore" src="./assets/down.png" id="down" />
-
+    <div id="more-result-container">
+      <img @click="loadMore" src="./assets/down.png" id="more-result" />
+    </div>
     <bottom></bottom>
   </div>
 </template>
@@ -54,7 +56,6 @@
 import event from "./components/event.vue";
 import top from "./components/header.vue";
 import bottom from "./components/footer.vue";
-
 import { getEvent } from "@/services/api/api.js";
 
 export default {
@@ -67,8 +68,6 @@ export default {
         ? "name"
         : "genre";
       const reversed = ["ZAArt", "ZAGenre"].includes(this.eventSortType);
-
-      console.log("Type de tri : " + field + " Inversé ? " + reversed);
 
       const filterFunc = (a) =>
         a[field].toLowerCase().includes(this.searchEvent.toLowerCase());
@@ -123,11 +122,9 @@ export default {
     },
     updateSort: function (value) {
       this.eventSortType = value;
-      console.log("update sort");
     },
     updateFilter: function (value) {
       this.searchEvent = value;
-      console.log("update filter");
     },
     cleanSearch: function () {
       this.searchEvent = "";
@@ -172,21 +169,28 @@ body {
   min-width: 300px;
 }
 
+#close-container {
+  width: 100%;
+}
+
 #close {
   width: 1.5%;
-  margin-left: 1%;
 }
 
 #filters {
   width: 100%;
 }
-#down {
-  width: 5%;
+#more-result-container {
+  width: 100%;
+}
+
+#more-result {
+  width: 4%;
   margin-top: 2%;
   cursor: pointer;
 }
 
-#test {
+#loader {
   width: 100vw;
   height: auto;
   display: flex;

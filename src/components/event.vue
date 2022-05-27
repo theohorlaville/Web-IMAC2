@@ -1,7 +1,7 @@
 <template>
   <div class="event">
     <a v-bind:href="eventUrl" target="blank">
-      <div class="info-mina">
+      <div class="info-minia">
         <h2>{{ titre }}</h2>
         <p>{{ date }}</p>
         <i>
@@ -46,7 +46,7 @@ p {
   transition-duration: 0.2s;
 }
 
-.info-mina {
+.info-minia {
   display: none;
   height: 50vh;
   position: absolute;
@@ -60,7 +60,7 @@ p {
   margin-bottom: 0;
 }
 
-.event:hover .info-mina {
+.event:hover .info-minia {
   background-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0),
@@ -88,7 +88,7 @@ p {
 }
 
 @media screen and (max-width: 768px) {
-  .info-mina {
+  .info-minia {
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,6 +1,9 @@
 <template>
   <div class="footer">
-    <p>Looking for the best events ? This is the place for !</p>
+    <p>
+      Looking for the best events ? This is the place for !<br />
+      Website developped by Théo HORLAVILLE in 2022
+    </p>
   </div>
 </template>
 

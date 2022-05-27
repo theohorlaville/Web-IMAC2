@@ -8,10 +8,10 @@
         :value="sort"
         id="event-sort"
       >
-        <option value="AZArt">Event Alphabétique</option>
-        <option value="ZAArt">Event !Alphabétique</option>
-        <option value="AZGenre">Genre Alphabétique</option>
-        <option value="ZAGenre">Genre !Alphabétique</option>
+        <option value="AZArt">Event A → Z</option>
+        <option value="ZAArt">Event Z → A</option>
+        <option value="AZGenre">Genre A → Z</option>
+        <option value="ZAGenre">Genre Z → A</option>
       </select>
 
       <input
@@ -19,7 +19,7 @@
         class="w3-input"
         v-on:input="emitFilter"
         :value="filter"
-        placeholder="Chercher un event"
+        placeholder="Search events"
       />
     </div>
   </div>
@@ -28,7 +28,6 @@
 <script>
 export default {
   name: "top",
-
   props: ["sort", "filter"],
   methods: {
     emitSort: function (event) {
